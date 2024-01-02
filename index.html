@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtube form </title>
+    <style>
+        body {
+            background-color: #121212; /* Dark background color */
+            color: #ffffff; /* Light text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1f1f1f; /* Darker background color for the form */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Soft shadow effect */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #333; /* Darker border color */
+            background-color: #333; /* Dark input background color */
+            color: #ffffff; /* Light text color for inputs */
+            border-radius: 4px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #4CAF50; /* Highlight color when focused */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50; /* Submit button color */
+            color: #ffffff; /* Text color on the submit button */
+            border: 1px solid #4CAF50;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Darker color on hover */
+        }
+      #msg {
+  color: #000000,;
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  background-color: #008a00;
+  border-radius: 2%;
+  
+}
+h2 {
+      text-align: center;
+      color: #41ff41;
+    }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Gmap data form  </h2>
+    <form name="submit-to-google-sheet">
+    <div class="form-group">
+        <label for="business-name">Business Name:</label>
+        <input type="text" id="business-name" name="business-name" placeholder="Business Name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website" placeholder="Website" required>
+    </div>
+
+    <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" placeholder="Location" required>
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" placeholder="Category" required>
+    </div>
+
+    <div class="form-group">
+        <label for="social-media">Social Media:</label>
+        <input type="url" id="social-media" name="social-media" placeholder="Social Media" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Phone" required>
+    </div>
+
+    <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Your message" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit">
+        <span id="msg"></span>
+    </div>
+</form>
+
+</div>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbycCAGJ_3NGriTjUFSEjaStObfuvwsFnGDxE1PUUeNw8T2ouR8htceAfBrSMS5IqF4S/exec'
+  const form = document.forms['submit-to-google-sheet']
+                    const msg = document.getElementById("msg")
+                  
+                    form.addEventListener('submit', e => {
+                      e.preventDefault()
+                      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                        .then(response =>{
+                          msg.innerHTML = "Messsge sent successfully"
+                          setTimeout(function(){ 
+                            msg.innerHTML = ""
+},5000)
+form.reset()
+
+})                                                   
+                        .catch(error => console.error('Error!', error.message))
+                    })
+                  
+</script>
+</body>
+</html>
